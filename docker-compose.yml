@@ -24,3 +24,37 @@ services:
       - user-service
       - product-service
       - order-service
+version: '3.8'
+
+services:
+  user-service:
+    build: ./user-service
+    ports:
+      - "3001:3001"
+    volumes:
+      - ./user-service:/app  # Mount local directory to container
+
+  product-service:
+    build: ./product-service
+    ports:
+      - "3002:3002"
+    volumes:
+      - ./product-service:/app  # Mount local directory to container
+
+  order-service:
+    build: ./order-service
+    ports:
+      - "3003:3003"
+    volumes:
+      - ./order-service:/app  # Mount local directory to container
+
+  api-gateway:
+    build: ./api-gateway
+    ports:
+      - "3000:3000"
+    depends_on:
+      - user-service
+      - product-service
+      - order-service
+    volumes:
+      - ./api-gateway:/app  # Mount local directory to container
