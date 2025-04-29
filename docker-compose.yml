@@ -15,11 +15,6 @@ services:
     build: ./product-service
     ports:
       - "5003:5003"
-
-  api-gateway:
-    build: ./api-gateway
-    ports:
-      - "5000:5000"
     depends_on:
       - user-service
       - order-service
